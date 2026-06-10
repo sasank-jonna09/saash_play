@@ -164,8 +164,8 @@ export default function VideoPlayer({ videoRef, blobUrl, status, hashMatch, onSe
   let overlayMessage = null;
   if (status !== ROOM_STATUS.SYNCED) {
     if (status === ROOM_STATUS.WAITING)        overlayMessage = 'Waiting for your co-watcher to join...';
-    else if (status === ROOM_STATUS.DISCONNECTED) overlayMessage = 'Peer disconnected. Waiting for them to rejoin...';
     else if (hashMatch === false)              overlayMessage = 'File mismatch. Please select the exact same file.';
+    else if (status === ROOM_STATUS.DISCONNECTED) overlayMessage = 'Peer disconnected. Waiting for them to rejoin...';
     else                                       overlayMessage = 'Syncing and verifying both video files...';
   }
 
