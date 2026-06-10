@@ -32,7 +32,12 @@ export default function FileLoader({ onFileSelected, isHashing, hashError }) {
 
   const handleChange = (e) => {
     if (e.target.files && e.target.files[0]) {
-      onFileSelected(e.target.files[0]);
+      const file = e.target.files[0];
+      if (file.type.startsWith('video/') || file.name.match(/\.(mp4|mkv|webm|avi|mov)$/i)) {
+        onFileSelected(file);
+      } else {
+        alert("Please select a valid video file.");
+      }
     }
   };
 
@@ -58,7 +63,6 @@ export default function FileLoader({ onFileSelected, isHashing, hashError }) {
         type="file" 
         ref={fileInputRef} 
         onChange={handleChange} 
-        accept="video/*" 
         className="hidden" 
       />
       <div className="w-20 h-20 bg-indigo-50 text-sv-accent rounded-full flex items-center justify-center mb-6 shadow-sm">
