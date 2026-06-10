@@ -15,10 +15,10 @@ export default function StatusBanner({ status, hashMatch, peerHash, myHash, isHa
 
   if (isHashing && videoFile)               key = 'uploading';
   else if (status === ROOM_STATUS.WAITING)  key = 'waiting';
+  else if (peerHash && hashMatch === false) key = 'mismatched';
   else if (status === ROOM_STATUS.DISCONNECTED) key = 'disconnected';
   else if (status === ROOM_STATUS.VERIFYING) {
-    if (peerHash && hashMatch === false)    key = 'mismatched';
-    else if (myHash && !peerHash)           key = 'waitingPeer';
+    if (myHash && !peerHash)                key = 'waitingPeer';
     else                                    key = 'verifying';
   }
   else if (status === ROOM_STATUS.SYNCED)   key = 'matched';
