@@ -25,8 +25,9 @@ self.addEventListener('message', (e) => {
 
   fileReader.onload = (e) => {
     spark.append(e.target.result);
-    // Include file size and name metadata
-    const metadata = `${file.name}-${file.size}-${file.lastModified}`;
+    // Only include file size to avoid hash mismatches.
+    // file.lastModified and file.name differ when transferring files across devices.
+    const metadata = `${file.size}`;
     spark.append(new TextEncoder().encode(metadata).buffer);
     self.postMessage({ hash: spark.end() });
   };
