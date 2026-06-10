@@ -69,7 +69,6 @@ export default function Room() {
   const localVideoRef = useRef(null);
   const [joinError, setJoinError] = useState('');
   const [showLeaveModal, setShowLeaveModal] = useState(false);
-  const [isWebcamFullscreen, setIsWebcamFullscreen] = useState(false);
 
   const {
     isHost, setIsHost,
@@ -347,28 +346,22 @@ export default function Room() {
             {/* Left Side: Webcams */}
             <div className="flex-1 flex flex-col relative">
               {(hasStarted || isConnected) ? (
-                <div className={`transition-all duration-500 ease-in-out ${isWebcamFullscreen ? 'fixed inset-0 z-[100] bg-black/95 block p-0 backdrop-blur-md' : 'w-full h-full bg-[#18181b]/80 backdrop-blur-xl rounded-[2rem] p-5 border-2 border-indigo-500/30 shadow-[0_20px_40px_rgba(0,0,0,0.4)] flex flex-col relative overflow-hidden group'}`}>
-                  <button 
-                    onClick={() => setIsWebcamFullscreen(!isWebcamFullscreen)}
-                    className={`absolute z-50 p-2.5 rounded-xl transition-all shadow-sm ${isWebcamFullscreen ? 'top-6 right-6 bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md' : 'top-3 right-3 scale-75 opacity-0 group-hover:opacity-100 group-hover:scale-100 bg-white/10 text-white hover:bg-white/20 border border-white/20 backdrop-blur-md'}`}
-                  >
-                    {isWebcamFullscreen ? <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg> : <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l-5 5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>}
-                  </button>
+                <div className="w-full h-full bg-[#18181b]/80 backdrop-blur-xl rounded-[2rem] p-5 border-2 border-indigo-500/30 shadow-[0_20px_40px_rgba(0,0,0,0.4)] flex flex-col relative overflow-hidden group">
                   
-                  <div className={`relative mx-auto overflow-hidden transition-all duration-500 ${isWebcamFullscreen ? 'absolute inset-0 rounded-none' : 'w-full h-full flex gap-4'}`}>
+                  <div className="relative mx-auto overflow-hidden transition-all duration-500 w-full h-full flex gap-4">
                     
                     {/* Remote Video */}
-                    <div className={`relative overflow-hidden transition-all duration-500 ${isWebcamFullscreen ? 'absolute inset-0 w-full h-full bg-transparent z-0 flex items-center justify-center' : 'flex-1 bg-black/40 rounded-2xl border border-white/10 shadow-inner order-2'}`}>
-                      <video ref={remoteVideoRef} autoPlay playsInline className={`w-full h-full ${isWebcamFullscreen ? 'object-contain' : 'object-cover'}`} />
-                      <div className={`absolute font-bold text-white bg-black/60 backdrop-blur-sm transition-all duration-500 z-10 ${isWebcamFullscreen ? 'top-6 left-6 text-sm px-4 py-2 rounded-xl border border-white/10' : 'bottom-1.5 left-1.5 text-[10px] px-2 py-0.5 rounded-md'}`}>
+                    <div className="relative overflow-hidden flex-1 bg-black/40 rounded-2xl border border-white/10 shadow-inner order-2">
+                      <video ref={remoteVideoRef} autoPlay playsInline className="w-full h-full object-cover" />
+                      <div className="absolute font-bold text-white bg-black/60 backdrop-blur-sm bottom-1.5 left-1.5 text-[10px] px-2 py-0.5 rounded-md z-10">
                         {displayPeerName || 'Waiting...'}
                       </div>
                     </div>
 
                     {/* Local Video */}
-                    <div className={`relative overflow-hidden transition-all duration-500 ${isWebcamFullscreen ? 'absolute bottom-8 right-8 w-48 sm:w-72 aspect-video bg-black rounded-2xl border-[3px] border-white/20 shadow-2xl hover:scale-105 cursor-pointer z-10' : 'flex-1 bg-black/40 rounded-2xl border border-white/10 shadow-inner order-1'}`}>
+                    <div className="relative overflow-hidden flex-1 bg-black/40 rounded-2xl border border-white/10 shadow-inner order-1">
                       <video ref={localVideoRef} autoPlay playsInline muted className="w-full h-full object-cover transform -scale-x-100" />
-                      <div className={`absolute font-bold text-white bg-black/60 backdrop-blur-sm transition-all duration-500 z-10 ${isWebcamFullscreen ? 'bottom-2 right-2 text-[10px] px-2 py-1 rounded-lg' : 'bottom-1.5 left-1.5 text-[10px] px-2 py-0.5 rounded-md'}`}>
+                      <div className="absolute font-bold text-white bg-black/60 backdrop-blur-sm bottom-1.5 left-1.5 text-[10px] px-2 py-0.5 rounded-md z-10">
                         You
                       </div>
                     </div>
