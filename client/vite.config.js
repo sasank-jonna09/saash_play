@@ -16,16 +16,5 @@ export default defineConfig({
   define: {
     global: 'globalThis',
   },
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          peer: ['simple-peer'],
-          socket: ['socket.io-client'],
-          hash: ['spark-md5'],
-        }
-      }
-    }
-  }
+  // Removed explicit manualChunks to fix Vite/Rollup build error
 })
