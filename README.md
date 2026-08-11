@@ -48,4 +48,4 @@ When selecting a video on a mobile device, **do not select it directly from your
 
 4. testing devcloud server
 
-5. testing all  server
+5. testing all  server now
